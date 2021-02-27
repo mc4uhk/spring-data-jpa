@@ -18,3 +18,7 @@ mvn clean package spring-boot:repackage -X
 
 #execute with externalized password
 export PASSWORD=XXXYYY; java -jar target/spring-hibernate-jpa-example-0.0.1-SNAPSHOT-spring-boot.jar 
+
+
+In Eclipse, need to setup the following ENV Variable in order to execute the program.
+PASSWORD: <DB Password>
