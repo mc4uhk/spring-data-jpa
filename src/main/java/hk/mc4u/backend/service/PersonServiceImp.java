@@ -16,6 +16,11 @@ import org.springframework.stereotype.Service;
 import hk.mc4u.backend.model.Person;
 import hk.mc4u.backend.repository.PersonRepository;
 
+/*
+Reference:
+https://www.baeldung.com/spring-data-derived-queries
+https://www.baeldung.com/spring-data-jpa-query
+*/
 @Service
 public class PersonServiceImp implements PersonService {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -47,5 +52,10 @@ public class PersonServiceImp implements PersonService {
 	        log.info("Entity: " + entityName);
 	    }
 	    
+	}
+
+	@Override
+	public List<Person> listPersonsA() {
+		return repository.findByLastNameStartingWith("G");
 	}
 }

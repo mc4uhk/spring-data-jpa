@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import hk.mc4u.backend.config.AppConfig;
@@ -16,7 +17,6 @@ import hk.mc4u.backend.service.PersonService;
 
 public class MainApp {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
 
 	public static void main(String[] args) throws SQLException {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -44,7 +44,15 @@ public class MainApp {
 			log.info("Email = " + person.getEmail());
 		}
 		
-		
+
+		List<Person> personsA = personService.listPersonsA();
+		for (Person person : personsA) {
+			log.info("Id = " + person.getId());
+			log.info("First Name = " + person.getFirstName());
+			log.info("Last Name = " + person.getLastName());
+			log.info("Email = " + person.getEmail());
+		}
+
 		
 
 		context.close();
