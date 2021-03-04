@@ -4,9 +4,12 @@ import java.lang.invoke.MethodHandles;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.configuration2.CompositeConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -19,6 +22,9 @@ public class MainApp {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	public static void main(String[] args) throws SQLException {
+		CompositeConfiguration config = new CompositeConfiguration();
+		config.addConfiguration(new PropertiesConfiguration());
+		
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		
 		PersonService personService = context.getBean(PersonService.class);
@@ -52,8 +58,6 @@ public class MainApp {
 			log.info("Last Name = " + person.getLastName());
 			log.info("Email = " + person.getEmail());
 		}
-
-		
 
 		context.close();
 	}
