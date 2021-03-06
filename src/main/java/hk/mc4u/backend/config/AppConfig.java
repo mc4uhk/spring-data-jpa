@@ -1,5 +1,8 @@
 package hk.mc4u.backend.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -22,16 +25,16 @@ public class AppConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setPersistenceUnitName("LOCAL_PERSISTENCE");
-		factoryBean.setDataSource(dataSource());
+		//factoryBean.setDataSource(dataSource());
 
-//		String password = System.getenv("PASSWORD");
-//
-//		Map<String, String> result = new HashMap<String, String>();
-//
-//		// Read the properties from a file instead of hard-coding it here.
-//		// Or pass the password in from the command-line.
-//		result.put("javax.persistence.jdbc.password", password);
-//		factoryBean.setJpaPropertyMap(result);
+		String password = System.getenv("PASSWORD");
+
+		Map<String, String> result = new HashMap<String, String>();
+
+		// Read the properties from a file instead of hard-coding it here.
+		// Or pass the password in from the command-line.
+		result.put("javax.persistence.jdbc.password", password);
+		factoryBean.setJpaPropertyMap(result);
 		return factoryBean;
 	}
 

@@ -1,5 +1,7 @@
 package hk.mc4u.backend.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,56 +13,69 @@ import javax.persistence.Table;
 @Table(name = "PERSONS")
 public class Person {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-   @Column(name = "FIRST_NAME")
-   private String firstName;
+	@Column(name = "FIRST_NAME")
+	private String firstName;
 
-   @Column(name = "LAST_NAME")
-   private String lastName;
+	@Column(name = "LAST_NAME")
+	private String lastName;
 
-   @Column(name = "EMAIL")
-   private String email;
+	@Column(name = "EMAIL")
+	private String email;
 
-   public Person() {}
-   
-   public Person(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-   }
+	@Column(name = "DAY_OF_BIRTH")
+	private LocalDate dayOfBirth;
 
-   public Long getId() {
-      return id;
-   }
+	public Person() {
+	}
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+	public Person(String firstName, String lastName, String email, LocalDate dayOfBirth) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.dayOfBirth = dayOfBirth;
+	}
 
-   public String getFirstName() {
-      return firstName;
-   }
+	public Long getId() {
+		return id;
+	}
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-   public String getLastName() {
-      return lastName;
-   }
+	public String getFirstName() {
+		return firstName;
+	}
 
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-   public String getEmail() {
-      return email;
-   }
+	public String getLastName() {
+		return lastName;
+	}
 
-   public void setEmail(String email) {
-      this.email = email;
-   }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDayOfBirth() {
+		return dayOfBirth;
+	}
+
+	public void setDayOfBirth(LocalDate dayOfBirth) {
+		this.dayOfBirth = dayOfBirth;
+	}
 }

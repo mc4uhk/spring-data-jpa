@@ -1,7 +1,11 @@
 package hk.mc4u.backend.service;
 
 import java.lang.invoke.MethodHandles;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.metamodel.EntityType;
@@ -11,7 +15,10 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import hk.mc4u.backend.model.Person;
 import hk.mc4u.backend.repository.PersonRepository;
@@ -24,7 +31,10 @@ https://www.baeldung.com/spring-data-jpa-query
 @Service
 public class PersonServiceImp implements PersonService {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
+
+	@Autowired
+	private ApplicationContext context;
+
 	@Autowired
 	private EntityManagerFactory emf;
 
@@ -36,7 +46,7 @@ public class PersonServiceImp implements PersonService {
 		repository.save(person);
 	}
 
-//   @Transactional(readOnly = true)
+//	@Transactional // (readOnly = true)
 	public List<Person> listPersons() {
 		return repository.findAll();
 	}
@@ -44,18 +54,41 @@ public class PersonServiceImp implements PersonService {
 	public SessionFactory getSessionFactory() {
 		return emf.unwrap(SessionFactory.class);
 	}
-	
-	public void printAllClass() {
+
+	public void printAllEntity() {
 		Metamodel classMetadata = emf.getMetamodel();
-	    for (EntityType entityType : classMetadata.getEntities()) {
-	        String entityName = entityType.getName();
-	        log.info("Entity: " + entityName);
-	    }
-	    
+		for (EntityType<?> entityType : classMetadata.getEntities()) {
+			String entityName = entityType.getName();
+			log.info("Entity: " + entityName);
+		}
 	}
 
-	@Override
+	public void printAllBean() {
+		String[] names = context.getBeanDefinitionNames();
+		Arrays.asList(names).forEach(s -> log.info("Bean: {}", s));
+	}
+
 	public List<Person> listPersonsA() {
 		return repository.findByLastNameStartingWith("G");
 	}
+
+	public List<Person> listSomePersons() {
+		return repository.findSomeUsersNative();
+	}
+
+	public List<Person> listSomePersonsByEmails() {
+		Set<String> emails = new HashSet<>();
+		return repository.findPersonByCustomSQL(emails);
+	}
+
+	@Transactional(rollbackFor = { Exception.class })
+	public void testTransaction() throws Exception {
+
+		Person p = new Person();
+		p.setFirstName("A new Person that should not be saved");
+		repository.save(p);
+
+		throw new Exception("Should rollback");
+	}
+
 }
