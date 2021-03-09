@@ -1,6 +1,5 @@
 package hk.mc4u.backend.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -21,6 +20,7 @@ public interface PersonService {
 	public SessionFactory getSessionFactory();
 	public List<Person> listSomePersons();
 	public List<Person> listSomePersonsByEmails() ;
+	public List<Object[]> listSomePersonByNatvieSQL(); 
 
 
 }

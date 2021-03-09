@@ -81,6 +81,11 @@ public class PersonServiceImp implements PersonService {
 		return repository.findPersonByCustomSQL(emails);
 	}
 
+	public List<Object[]> listSomePersonByNatvieSQL() {
+		Set<String> emails = new HashSet<>();
+		return repository.findPersonByNatvieSQL(emails);
+	}
+
 	@Transactional(rollbackFor = { Exception.class })
 	public void testTransaction() throws Exception {
 
@@ -91,4 +96,6 @@ public class PersonServiceImp implements PersonService {
 		throw new Exception("Should rollback");
 	}
 
+	
+	
 }

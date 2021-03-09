@@ -68,7 +68,7 @@ public class MainApp {
 				log.info("Person: {} {} {} {} {}" , person.getId(), person.getFirstName(), person.getLastName() ,person.getEmail() ,person.getDayOfBirth());
 			}
 		}
-
+		
 
 		enable = true;
 		if (enable) {
@@ -78,6 +78,17 @@ public class MainApp {
 				log.info("Person: {} {} {} {} {}" , person.getId(), person.getFirstName(), person.getLastName() ,person.getEmail() ,person.getDayOfBirth());
 			}
 		}
+
+		enable = true;
+		if (enable) {
+			log.info("------listSomePersonByNatvieSQL---------------------------------------------------");
+			List<Object[]> objects = personService.listSomePersonByNatvieSQL();
+			for (Object[] obj : objects) {
+				log.info("Obj: {} {} {} {} {}" , obj[0],obj[1],obj[2],obj[3]);
+			}
+		}
+
+		
 
 		context.close();
 	}

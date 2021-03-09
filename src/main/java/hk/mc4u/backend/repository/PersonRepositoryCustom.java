@@ -8,4 +8,8 @@ import hk.mc4u.backend.model.Person;
 public interface PersonRepositoryCustom  {
 
 	List<Person> findPersonByCustomSQL(Set<String> emails);
+	
+	List<Object[]> findPersonByNatvieSQL(Set<String> emails);
+	
+	
 }
