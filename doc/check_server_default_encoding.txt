@@ -1,0 +1,6 @@
+echo $LC_CTYPE
+echo $LANG
+locale -a
+
+export LC_ALL=pt_PT.utf8 
+export LANG="$LC_ALL"

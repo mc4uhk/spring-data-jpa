@@ -23,6 +23,8 @@ public class MainApp {
 		CompositeConfiguration config = new CompositeConfiguration();
 		config.addConfiguration(new PropertiesConfiguration());
 
+		log.info("{}", "開始");
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		PersonService personService = context.getBean(PersonService.class);
