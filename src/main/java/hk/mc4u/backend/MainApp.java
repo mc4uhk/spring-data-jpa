@@ -1,7 +1,6 @@
 package hk.mc4u.backend;
 
 import java.lang.invoke.MethodHandles;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,6 +14,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import hk.mc4u.backend.config.AppConfig;
 import hk.mc4u.backend.model.Person;
 import hk.mc4u.backend.service.PersonService;
+import hk.mc4u.backend.service.SomeServiceA;
+import hk.mc4u.backend.service.SomeServiceB;
 
 public class MainApp {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -28,6 +29,8 @@ public class MainApp {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		PersonService personService = context.getBean(PersonService.class);
+    	SomeServiceA serviceA = context.getBean(SomeServiceA.class);
+    	SomeServiceB serviceB = context.getBean(SomeServiceB.class);
 
 //		Person person01 = context.getBean(Person.class);
 
@@ -35,8 +38,10 @@ public class MainApp {
 		log.info("{}", sessionFactory);
 		personService.printAllEntity();
 		personService.printAllBean();
-		
-		boolean enable = true;
+
+    	serviceA.doSomething();
+
+		boolean enable = false;
 		if (enable) {
 		// Add Persons
 			personService.add(new Person("Rahul", "Gupta", "rahulgupta@company.com", LocalDate.now()));

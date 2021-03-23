@@ -1,7 +1,7 @@
 package hk.mc4u.backend.service;
 
 import java.lang.invoke.MethodHandles;
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +41,7 @@ public class PersonServiceImp implements PersonService {
 	@Autowired
 	private PersonRepository repository;
 
-//   @Transactional
+   @Transactional
 	public void add(Person person) {
 		repository.save(person);
 	}
