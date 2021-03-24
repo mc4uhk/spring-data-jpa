@@ -50,7 +50,10 @@ public class MainApp {
 		serviceA.doSomethingElse();
 
 		Map<String, String> params = new HashMap<>();
-		params.put("NAME", "Evie");
+		params.put("firstName", "Evie");
+		params.put("lastName", "Yau");
+		params.put("pet.name", "ball law");
+		params.put("pet.height", "30cm");
 
 		facade.doService(params, new OtherInputHandler());
 
@@ -68,18 +71,19 @@ public class MainApp {
 			log.error("rollback transaction", e);
 		}
 
-		// Get Persons
-		List<Person> persons = personService.listPersons();
-		for (Person person : persons) {
-			log.info("Id = " + person.getId());
-			log.info("First Name = " + person.getFirstName());
-			log.info("Last Name = " + person.getLastName());
-			log.info("Email = " + person.getEmail());
-			log.info("Day Of Birth = " + person.getDayOfBirth());
-		}
-
 		enable = false;
 		if (enable) {
+
+		// Get Persons
+			List<Person> persons = personService.listPersons();
+			for (Person person : persons) {
+				log.info("Id = " + person.getId());
+				log.info("First Name = " + person.getFirstName());
+				log.info("Last Name = " + person.getLastName());
+				log.info("Email = " + person.getEmail());
+				log.info("Day Of Birth = " + person.getDayOfBirth());
+			}
+
 			log.info("------listSomePersons---------------------------------------------------");
 			List<Person> personsA = personService.listSomePersons();
 			for (Person person : personsA) {
@@ -88,7 +92,7 @@ public class MainApp {
 			}
 		}
 
-		enable = true;
+		enable = false;
 		if (enable) {
 			log.info("------listSomePersonsByEmails---------------------------------------------------");
 			List<Person> personsA = personService.listSomePersonsByEmails();
