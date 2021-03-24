@@ -2,7 +2,9 @@ package hk.mc4u.backend;
 
 import java.lang.invoke.MethodHandles;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -13,7 +15,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import hk.mc4u.backend.config.AppConfig;
 import hk.mc4u.backend.model.Person;
+import hk.mc4u.backend.service.OtherInputHandler;
 import hk.mc4u.backend.service.PersonService;
+import hk.mc4u.backend.service.ServiceFacade;
 import hk.mc4u.backend.service.SomeServiceA;
 import hk.mc4u.backend.service.SomeServiceB;
 
@@ -31,6 +35,7 @@ public class MainApp {
 		PersonService personService = context.getBean(PersonService.class);
     	SomeServiceA serviceA = context.getBean(SomeServiceA.class);
     	SomeServiceB serviceB = context.getBean(SomeServiceB.class);
+    	ServiceFacade facade = context.getBean(ServiceFacade.class);
 
 //		Person person01 = context.getBean(Person.class);
 
@@ -40,7 +45,14 @@ public class MainApp {
 		personService.printAllBean();
 
     	serviceA.doSomething();
-
+    	serviceB.doSomethingElse();
+    	
+    	Map<String,String> params = new HashMap<>();
+    	params.put("NAME", "Evie");
+    	
+    	
+    	facade.doService(params, new OtherInputHandler() );
+    	
 		boolean enable = false;
 		if (enable) {
 		// Add Persons
