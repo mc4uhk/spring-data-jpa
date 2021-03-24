@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "PERSONS")
@@ -29,6 +30,9 @@ public class Person {
 	@Column(name = "DAY_OF_BIRTH")
 	private LocalDate dayOfBirth;
 
+	@Transient
+	private Pet pet = new Pet();
+	
 	public Person() {
 	}
 
@@ -77,5 +81,13 @@ public class Person {
 
 	public void setDayOfBirth(LocalDate dayOfBirth) {
 		this.dayOfBirth = dayOfBirth;
+	}
+
+	public Pet getPet() {
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 }
