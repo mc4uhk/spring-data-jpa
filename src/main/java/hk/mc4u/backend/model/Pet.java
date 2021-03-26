@@ -1,12 +1,29 @@
 package hk.mc4u.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Pet {
 
+	@JsonProperty
 	private Long id;
 
+	@JsonProperty
 	private String name;
 
+	@JsonProperty
 	private Integer age;
+
+	
+	public Pet() {
+		super();
+	}
+
+	public Pet(Long id, String name, Integer age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
 
 	public Long getId() {
 		return id;
