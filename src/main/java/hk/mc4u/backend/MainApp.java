@@ -102,10 +102,19 @@ public class MainApp {
 			}
 		}
 
-		enable = true;
+		enable = false;
 		if (enable) {
 			log.info("------listSomePersonByNatvieSQL---------------------------------------------------");
 			List<Object[]> objects = personService.listSomePersonByNatvieSQL();
+			for (Object[] obj : objects) {
+				log.info("Obj: {} {} {} {} {}", obj[0], obj[1], obj[2], obj[3]);
+			}
+		}
+
+		enable = true;
+		if (enable) {
+			log.info("------listSomePersonByNatvieSQLB---------------------------------------------------");
+			List<Object[]> objects = personService.listSomePersonByNatvieSQLB(160);
 			for (Object[] obj : objects) {
 				log.info("Obj: {} {} {} {} {}", obj[0], obj[1], obj[2], obj[3]);
 			}

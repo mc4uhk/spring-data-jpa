@@ -1,6 +1,7 @@
 package hk.mc4u.backend.model;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,8 +32,8 @@ public class Person {
 	private LocalDate dayOfBirth;
 
 	@Transient
-	private Pet pet = new Pet();
-	
+	private Pet pet;
+
 	public Person() {
 	}
 
@@ -83,8 +84,8 @@ public class Person {
 		this.dayOfBirth = dayOfBirth;
 	}
 
-	public Pet getPet() {
-		return pet;
+	public Optional<Pet> getPet() {
+		return Optional.ofNullable(pet);
 	}
 
 	public void setPet(Pet pet) {

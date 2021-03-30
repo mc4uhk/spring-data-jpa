@@ -20,7 +20,8 @@ public interface PersonService {
 	public SessionFactory getSessionFactory();
 	public List<Person> listSomePersons();
 	public List<Person> listSomePersonsByEmails() ;
-	public List<Object[]> listSomePersonByNatvieSQL(); 
+	public List<Object[]> listSomePersonByNatvieSQL();
+	public List<Object[]> listSomePersonByNatvieSQLB(Integer id); 
 
 
 }

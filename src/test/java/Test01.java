@@ -1,40 +1,35 @@
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.BeanUtils;
+
+import java.io.StringWriter;
+
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import hk.mc4u.backend.model.Pet;
-
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 public class Test01 {
-	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	@Test
-	public void test01() throws JsonProcessingException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		Pet pet = new Pet(1L, "Ballaw", 12);
-		log.info("hi {}",pet);
-		ObjectMapper objectMapper =new ObjectMapper();
-		objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-
-		String jsonStr = objectMapper.writeValueAsString(pet);
-		
-		log.info(jsonStr);
-		Pet pet2 = jsonToObject(jsonStr, Pet.class);
-		
-		log.info(BeanUtils.describe(pet2).toString());
-	}
-	
-	public <T> T jsonToObject(String jsonStr, Class<T> target) throws JsonMappingException, JsonProcessingException {
-		ObjectMapper objectMapper =new ObjectMapper();
-		return objectMapper.readValue(jsonStr, target);
-		
+	public void test01() {
+		//Reference:
+		//https://github.com/thymeleaf/thymeleaf/issues/395
+		String templateName = "helloTemplate";
+		TemplateEngine templateEngine = new TemplateEngine();
+		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+		templateResolver.setPrefix("template/");
+		templateResolver.setSuffix(".txt");
+		templateResolver.setTemplateMode(TemplateMode.TEXT);
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setOrder(0);
+	    
+		templateResolver.setTemplateMode("TEXT");
+		templateEngine.setTemplateResolver(templateResolver);
+		Context context = new Context();
+		context.setVariable("name", "<World>");
+		StringWriter stringWriter = new StringWriter();
+		templateEngine.process(templateName, context, stringWriter);
+		String result =stringWriter.toString();
+		System.out.println(result);
 	}
 }

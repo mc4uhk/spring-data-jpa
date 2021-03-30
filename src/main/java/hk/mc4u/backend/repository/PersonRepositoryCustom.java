@@ -10,6 +10,8 @@ public interface PersonRepositoryCustom  {
 	List<Person> findPersonByCustomSQL(Set<String> emails);
 	
 	List<Object[]> findPersonByNatvieSQL(Set<String> emails);
+
+	List<Object[]> findPersonByNatvieSQLB(Integer id);
 	
 	
 }

@@ -1,12 +1,12 @@
 package hk.mc4u.backend.service;
 
 import java.lang.invoke.MethodHandles;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import hk.mc4u.backend.model.Person;
 import hk.mc4u.backend.repository.PersonRepository;
@@ -37,6 +36,9 @@ public class PersonServiceImp implements PersonService {
 
 	@Autowired
 	private EntityManagerFactory emf;
+
+	@Autowired
+	private EntityManager em;
 
 	@Autowired
 	private PersonRepository repository;
@@ -84,6 +86,11 @@ public class PersonServiceImp implements PersonService {
 	public List<Object[]> listSomePersonByNatvieSQL() {
 		Set<String> emails = new HashSet<>();
 		return repository.findPersonByNatvieSQL(emails);
+	}
+
+	@Override
+	public List<Object[]> listSomePersonByNatvieSQLB(Integer id) {
+		return repository.findPersonByNatvieSQLB(id);
 	}
 
 	@Transactional(rollbackFor = { Exception.class })

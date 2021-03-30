@@ -17,13 +17,13 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager em;
 
 	@Override
 	public List<Person> findPersonByCustomSQL(Set<String> emails) {
 		String sql = "select * from PERSONS where id < 10 order by first_Name";
 		@SuppressWarnings("unchecked")
-		List<Person> persons = entityManager.createNativeQuery(sql,Person.class).getResultList();
+		List<Person> persons = em.createNativeQuery(sql,Person.class).getResultList();
 		return 	persons;	
  
 	}
@@ -31,13 +31,24 @@ public class PersonRepositoryCustomImpl implements PersonRepositoryCustom {
 	@Override
 	public List<Object[]> findPersonByNatvieSQL(Set<String> emails) {
 		String sql = "select * from PERSONS where id < 10 order by LAST_Name";
-		Query q = entityManager.createNativeQuery(sql);
+		Query q = em.createNativeQuery(sql);
+		 @SuppressWarnings("unchecked")
 		 List<Object[]> resultList = q.getResultList();
 		 resultList.forEach(o -> log.info("{}",o));
 		return 	resultList;	
- 
-	}
+ 	}
 
-	
+
+	@Override
+	public List<Object[]> findPersonByNatvieSQLB(Integer id) {
+		String sql = "select * from PERSONS where id < ?11 order by id";
+		Query q = em.createNativeQuery(sql);
+		q.setParameter(11, id);
+		 @SuppressWarnings("unchecked")
+		List<Object[]> resultList = q.getResultList();
+		 resultList.forEach(o -> log.info("{}",o));
+		return 	resultList;	
+ 	}
+
 
 }
