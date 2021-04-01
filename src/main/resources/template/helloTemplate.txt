@@ -7,3 +7,7 @@ Helloworld
 1[(${name})]2 //un escape mode
 
 3[[${name}]]4 //escape mode
+
+[(${o.name})]
+
+[(${today})]

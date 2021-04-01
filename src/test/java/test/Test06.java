@@ -29,6 +29,9 @@ public class Test06 {
 				.map(this::colorize)
 				.map(m -> m.get("colorCode"))
 				.forEach(log::info);
+			
+			log.info("\u20BF");
+			log.info("😄");
 
 	}
 
