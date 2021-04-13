@@ -19,6 +19,7 @@ import hk.mc4u.backend.model.Part;
 import hk.mc4u.backend.model.Person;
 import hk.mc4u.backend.model.Pet;
 import hk.mc4u.backend.model.Question;
+import hk.mc4u.backend.service.FormFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,24 +45,7 @@ class Test07 {
 	}
 
 	public void marshal() throws JAXBException, IOException {
-		Form form = new Form();
-
-		form.setName("My Name");
-		form.getPerson().setEmail("123@abc.com");
-		form.getPerson().setId(123456789L);
-
-		form.getPets().add(new Pet(123L, "A", 1));
-		form.getPets().add(new Pet(456L, "B", 2));
-		form.getPets().add(new Pet(789L, "C", 3));
-		form.getPets().add(new Pet(777L, "D", 4));
-		form.getPets().add(new Pet(999L, "E", 5));
-
-		List<Question> questions = new ArrayList<>();
-		questions.add(new Question("What's This?", "apple"));
-		questions.add(new Question("Where r we going?", "home"));
-
-		form.getPartA().setQ1(new Question("What's This?", "apple"));
-  		form.getPartB().setQ1(new Question("Where r we going?", "home"));
+		Form form = FormFactory.createForm();
 
 		JAXBContext context = JAXBContext.newInstance(Form.class);
 		Marshaller mar = context.createMarshaller();

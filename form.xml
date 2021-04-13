@@ -10,7 +10,10 @@
             <question>What's This?</question>
             <ans>apple</ans>
         </q1>
-        <q2/>
+        <q2>
+            <question>What time is it?</question>
+            <ans>5pm</ans>
+        </q2>
         <q3/>
     </partA>
     <partB>
