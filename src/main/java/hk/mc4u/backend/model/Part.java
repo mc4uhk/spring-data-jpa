@@ -1,30 +1,48 @@
 package hk.mc4u.backend.model;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Part {
 
-	
-	@XmlElementWrapper(name = "questions")
-	@XmlElement(name = "question")	
-	private List<Question> questions;
+	private Question q1 = new Question();
+	private Question q2 = new Question();
+	private Question q3 = new Question();
 	
 
 	public Part() {
 	}
 
 
-	public List<Question> getQuestions() {
-		return questions;
+	public Question getQ1() {
+		return q1;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+
+	public void setQ1(Question q1) {
+		this.q1 = q1;
 	}
+
+
+	public Question getQ2() {
+		return q2;
+	}
+
+
+	public void setQ2(Question q2) {
+		this.q2 = q2;
+	}
+
+
+	public Question getQ3() {
+		return q3;
+	}
+
+
+	public void setQ3(Question q3) {
+		this.q3 = q3;
+	}
+
+
 }

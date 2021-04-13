@@ -57,11 +57,11 @@ class Test07 {
 		form.getPets().add(new Pet(999L, "E", 5));
 
 		List<Question> questions = new ArrayList<>();
-		questions.add(new Question(1, "What's This?", "apple"));
-		questions.add(new Question(2, "Where r we going?", "home"));
+		questions.add(new Question("What's This?", "apple"));
+		questions.add(new Question("Where r we going?", "home"));
 
-		form.getPartA().setQuestions(questions);
-		form.getPartB().setQuestions(questions);
+		form.getPartA().setQ1(new Question("What's This?", "apple"));
+  		form.getPartB().setQ1(new Question("Where r we going?", "home"));
 
 		JAXBContext context = JAXBContext.newInstance(Form.class);
 		Marshaller mar = context.createMarshaller();

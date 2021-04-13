@@ -1,17 +1,16 @@
 package hk.mc4u.backend.model;
 
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(propOrder = { "question", "ans" })
 public class Question {
-	int	id;
 	String question;
 	String ans;
-	
-	
 	
 	public Question() {
 	}
 
-	public Question(int id, String question, String ans) {
-		this.id = id;
+	public Question(String question, String ans) {
 		this.question = question;
 		this.ans = ans;
 	}
@@ -29,13 +28,5 @@ public class Question {
 		this.ans = ans;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	
 }

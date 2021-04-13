@@ -6,32 +6,20 @@
         <email>123@abc.com</email>
     </person>
     <partA>
-        <questions>
-            <question>
-                <ans>apple</ans>
-                <id>1</id>
-                <question>What's This?</question>
-            </question>
-            <question>
-                <ans>home</ans>
-                <id>2</id>
-                <question>Where r we going?</question>
-            </question>
-        </questions>
+        <q1>
+            <question>What's This?</question>
+            <ans>apple</ans>
+        </q1>
+        <q2/>
+        <q3/>
     </partA>
     <partB>
-        <questions>
-            <question>
-                <ans>apple</ans>
-                <id>1</id>
-                <question>What's This?</question>
-            </question>
-            <question>
-                <ans>home</ans>
-                <id>2</id>
-                <question>Where r we going?</question>
-            </question>
-        </questions>
+        <q1>
+            <question>Where r we going?</question>
+            <ans>home</ans>
+        </q1>
+        <q2/>
+        <q3/>
     </partB>
     <pets>
         <pet>
