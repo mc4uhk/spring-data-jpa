@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Test06 {
+public class Java8StreamTest {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	@Test
 	public void test01() {
 		List<Map<String, String>> mapList = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 20; i++) {
 			Map<String, String> map1 = new HashMap<>();
 			Random rand = new Random();
 			map1.put("value", String.valueOf(rand.nextInt(100)));

@@ -9,7 +9,9 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-public class Test01 {
+import hk.mc4u.backend.model.Person;
+
+public class ThymeleafTest {
 
 	@Test
 	public void test01() {
@@ -28,6 +30,11 @@ public class Test01 {
 		templateEngine.setTemplateResolver(templateResolver);
 		Context context = new Context();
 		context.setVariable("name", "<World>");
+		
+		Person person = new Person();
+		person.setFirstName("Alanis");
+		context.setVariable("o", person);
+		
 		StringWriter stringWriter = new StringWriter();
 		templateEngine.process(templateName, context, stringWriter);
 		String result =stringWriter.toString();

@@ -8,6 +8,6 @@ Helloworld
 
 3[[${name}]]4 //escape mode
 
-[(${o.name})]
+[(${o.firstName})]
 
 [(${today})]

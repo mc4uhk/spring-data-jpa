@@ -2,17 +2,23 @@ package hk.mc4u.backend.service;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class SomeServiceB {
-	
+
+	public String doSomething(String msg) {
+		log.info(msg);
+		return msg;
+	}
+
 	public String doSomething() {
-		System.out.println("B do Something");
-		return null;
+		return doSomething("B do Something");
 	}
 	
 	public String doSomethingElse() {
-		System.out.println("B do Something Else!!");
-		return null;
+		return doSomething("B do Something Else!!");
 	}
 	
 	

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<form>
+    <name>My Name</name>
+    <person>
+        <id>123456789</id>
+        <email>123@abc.com</email>
+    </person>
+    <partA>
+        <questions>
+            <question>
+                <ans>apple</ans>
+                <id>1</id>
+                <question>What's This?</question>
+            </question>
+            <question>
+                <ans>home</ans>
+                <id>2</id>
+                <question>Where r we going?</question>
+            </question>
+        </questions>
+    </partA>
+    <partB>
+        <questions>
+            <question>
+                <ans>apple</ans>
+                <id>1</id>
+                <question>What's This?</question>
+            </question>
+            <question>
+                <ans>home</ans>
+                <id>2</id>
+                <question>Where r we going?</question>
+            </question>
+        </questions>
+    </partB>
+    <pets>
+        <pet>
+            <age>1</age>
+            <id>123</id>
+            <name>A</name>
+        </pet>
+        <pet>
+            <age>2</age>
+            <id>456</id>
+            <name>B</name>
+        </pet>
+        <pet>
+            <age>3</age>
+            <id>789</id>
+            <name>C</name>
+        </pet>
+        <pet>
+            <age>4</age>
+            <id>777</id>
+            <name>D</name>
+        </pet>
+        <pet>
+            <age>5</age>
+            <id>999</id>
+            <name>E</name>
+        </pet>
+    </pets>
+</form>

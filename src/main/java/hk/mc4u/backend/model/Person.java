@@ -1,6 +1,7 @@
 package hk.mc4u.backend.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Column;
@@ -10,9 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 @Entity
 @Table(name = "PERSONS")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
 
 	@Id
@@ -33,6 +39,7 @@ public class Person {
 
 	@Transient
 	private Pet pet;
+	
 
 	public Person() {
 	}
@@ -91,4 +98,5 @@ public class Person {
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
+
 }
