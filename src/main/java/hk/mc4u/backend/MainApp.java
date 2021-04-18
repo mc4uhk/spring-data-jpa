@@ -2,17 +2,24 @@ package hk.mc4u.backend;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
 import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import hk.mc4u.backend.config.AppConfig;
 import hk.mc4u.backend.model.Person;
@@ -25,7 +32,7 @@ import hk.mc4u.backend.service.SomeServiceB;
 public class MainApp {
 	private final static Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException {
 		CompositeConfiguration config = new CompositeConfiguration();
 		config.addConfiguration(new PropertiesConfiguration());
 
@@ -33,14 +40,41 @@ public class MainApp {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
+		EntityManager em = context.getBean(EntityManager.class);
+		
+		SessionFactory sessionFactory = em.getEntityManagerFactory().unwrap(SessionFactory.class);
+		
+		ComboPooledDataSource ds = context.getBean(ComboPooledDataSource.class);
+
+		int i=0;
+		boolean debug = true;
+		while(debug) {
+			log.info("{}", i++);
+			try {
+				//Session session = sessionFactory.getCurrentSession();
+				Session session = sessionFactory.openSession();
+				Transaction tx = session.beginTransaction();
+				log.info("DS: {}", ds.getNumBusyConnectionsAllUsers());
+				Thread.sleep(1000);
+				tx.commit();
+				session.close();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+
 		PersonService personService = context.getBean(PersonService.class);
 		SomeServiceA serviceA = context.getBean(SomeServiceA.class);
 		SomeServiceB serviceB = context.getBean(SomeServiceB.class);
 		ServiceFacade facade = context.getBean(ServiceFacade.class);
 
+		personService.printAllEntity();
+		personService.printAllBean();
+
 //		Person person01 = context.getBean(Person.class);
 
-		SessionFactory sessionFactory = personService.getSessionFactory();
+		//SessionFactory sessionFactory = personService.getSessionFactory();
 		log.info("{}", sessionFactory);
 		personService.printAllEntity();
 		personService.printAllBean();
