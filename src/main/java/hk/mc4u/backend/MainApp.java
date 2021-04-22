@@ -15,6 +15,8 @@ import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.hibernate.stat.Statistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -50,16 +52,23 @@ public class MainApp {
 		boolean debug = true;
 		while(debug) {
 			log.info("{}", i++);
+			Session session = sessionFactory.openSession();
+//			Session session = sessionFactory.getCurrentSession();
 			try {
 				//Session session = sessionFactory.getCurrentSession();
-				Session session = sessionFactory.openSession();
+				log.info("DS1: {}", ds.getNumBusyConnectionsAllUsers());
 				Transaction tx = session.beginTransaction();
-				log.info("DS: {}", ds.getNumBusyConnectionsAllUsers());
+				log.info("DS2: {}", ds.getNumBusyConnectionsAllUsers());
 				Thread.sleep(1000);
+				Query q = session.createNativeQuery("select * from PERSONS");
+				List resultList = q.getResultList();
+				log.info(resultList.toString());
 				tx.commit();
-				session.close();
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}finally {
+				session.close();
 			}
 		}
 		
